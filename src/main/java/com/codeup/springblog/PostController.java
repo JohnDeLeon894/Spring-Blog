@@ -1,7 +1,11 @@
 package com.codeup.springblog;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -19,17 +23,42 @@ public class PostController {
     * POST	/posts/create	create a new post
     * */
 
+    private final PostRepo postDao;
+
+    public PostController (PostRepo postDao){
+        this.postDao = postDao;
+    }
+
     @GetMapping(path = "/post")
-    @ResponseBody
-    public String viewPost(){
-        return "Posts index page";
+    public String viewPosts(Model model){
+        List<Post> postList = postDao.findAll();
+        model.addAttribute("posts", postList);
+        return "post/index";
     }
 
     @GetMapping(path = "/post/{id}")
-    @ResponseBody
-    public String viewIndiPost(@PathVariable int id){
-        return "view an individual post";
+    public String viewIndiPost(@PathVariable long id, Model model){
+
+//        List<Post> posts = postList();
+//        Post post = posts.get(id-1);
+        Post post = postDao.findById(id);
+        model.addAttribute("post", post);
+
+        return "post/show";
     }
+
+//    private List<Post> postList(){
+//
+//        List<Post> posts = new ArrayList<> ();
+//
+//        Post post1 = new Post("Post 1", "Some nerdy things about nerdy people.");
+//        Post post2 = new Post("Post 2", "Other nerdy things about nerdy stuff.");
+//
+//        posts.add(post1);
+//        posts.add(post2);
+//
+//        return posts;
+//    }
 
     @GetMapping(path = "/post/create")
     @ResponseBody
