@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8"/>
+    <title>Dice Roll</title>
+</head>
+<body>
+
+<div th:replace="partials/dicerollparts :: navbar"></div>
+<div th:if="${rolled}">
+    <div th:if="${match}">
+        <h1>Congratulations! You Win! :D</h1>
+        <p>Your guess was <span th:text="${guess}"></span> </p>
+        <p> the roll was  <span th:text="${roll}"></span></p>
+    </div>
+    <div th:if="${!match}">
+        <h1>Congratulations! You lost! :D</h1>
+        <p>Your guess was <span th:text="${guess}"></span> </p>
+        <p> the roll was  <span th:text="${roll}"></span></p>
+    </div>
+
+</div>
+
+</body>
+</html>
