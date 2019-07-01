@@ -1,4 +1,4 @@
-package com.codeup.springblog;
+package com.codeup.springblog.model;
 
 import javax.persistence.*;
 
@@ -12,6 +12,8 @@ public class Post {
     private String title;
     @Column(nullable = false, columnDefinition = "text")
     private String body;
+    @OneToOne()
+    private User owner;
 
 
     public Post() {

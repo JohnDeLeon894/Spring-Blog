@@ -1,11 +1,15 @@
-package com.codeup.springblog;
+package com.codeup.springblog.model;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Dogs")
-public class Dog {
-    /*
+@Table(name = "people")
+public class Person {
+
+/*
 
      Create a model class (Dog) with proper annotations to make a dogs table with the following
      properties:
@@ -27,13 +31,14 @@ public class Dog {
     @Column(name="reside_state", nullable=false, columnDefinition="char(2)")
     private String state;
 
-    public Dog(int age, String name, String state) {
+    public Person(int age, String name, String state) {
         this.age = age;
         this.name = name;
         this.state = state;
     }
 
-    public Dog() {
+    public Person() {
+
     }
 
     public long getId() {

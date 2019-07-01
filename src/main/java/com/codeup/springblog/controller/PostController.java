@@ -1,29 +1,20 @@
-package com.codeup.springblog;
+package com.codeup.springblog.controller;
 
+import com.codeup.springblog.repos.PostRepo;
+import com.codeup.springblog.model.User;
+import com.codeup.springblog.model.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 public class PostController {
 
-    /*
-    *
-    *  Create a PostController class. This controller should return strings for the following
-    * routes that describe what will ultimately be there.
-    * method	url	description
-    * GET	/posts	posts index page
-    * GET	/posts/{id}	view an individual post
-    * GET	/posts/create	view the form for creating a post
-    * POST	/posts/create	create a new post
-    * */
 
     private final PostRepo postDao;
+
 
     public PostController (PostRepo postDao){
         this.postDao = postDao;
@@ -42,6 +33,7 @@ public class PostController {
 //        List<Post> posts = postList();
 //        Post post = posts.get(id-1);
         Post post = postDao.findById(id);
+//        User user = ;
         model.addAttribute("post", post);
 
         return "post/show";
