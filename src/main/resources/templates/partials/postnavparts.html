@@ -1,0 +1,21 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+
+<nav th:fragment="inxnavbar">
+<div th:each="post: ${posts}">
+
+    <a th:href = "@{|/post/${post.id}|}">
+        <span th:text="${post.id}"></span>
+    </a>
+
+</div>
+</nav>
+
+</body>
+</html>
