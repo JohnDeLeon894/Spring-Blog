@@ -9,6 +9,11 @@
 <div >
     <h3 th:text="${post.title}"></h3>
     <p th:text="${post.body}"></p>
+
+    <form th:action="@{'/post/'+${post.id}+'/delete'}" method="post">
+        <button id="${post.id}">Delete this Post</button>
+    </form>
+    
 </div>
 
 

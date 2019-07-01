@@ -47,31 +47,26 @@ public class PostController {
         return "post/show";
     }
 
-//    private List<Post> postList(){
-//
-//        List<Post> posts = new ArrayList<> ();
-//
-//        Post post1 = new Post("Post 1", "Some nerdy things about nerdy people.");
-//        Post post2 = new Post("Post 2", "Other nerdy things about nerdy stuff.");
-//
-//        posts.add(post1);
-//        posts.add(post2);
-//
-//        return posts;
-//    }
-
     @GetMapping(path = "/post/create")
-
     public String createPostForm(){
         return "post/create";
     }
 
     @PostMapping(path = "/post/create")
-    @RequestMapping
-    public String createPost(){
-        return "post/show";
+
+    public String insert(
+        @RequestParam String title,
+        @RequestParam String body){
+
+        Post post= new Post(title, body);
+        postDao.save(post);
+        return "redirect:/post";
     }
 
-
+    @PostMapping("/post/{id}/delete")
+    public String delete(@PathVariable long id) {
+        postDao.delete(id);
+        return "redirect:/post";
+    }
 
 }
