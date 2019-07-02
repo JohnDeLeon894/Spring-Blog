@@ -1,0 +1,18 @@
+a:-webkit-any-link{
+    text-decoration: none;
+    color: darkslategrey;
+}
+
+a:visited{
+    text-decoration: none;
+    color: darkslategrey;
+}
+
+a:hover{
+    text-decoration: none;
+    color: darkslategrey;
+}
+a:active{
+    text-decoration: none;
+    color: darkslategrey;
+}

@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class UserController {
-    private final UserRepo userDao;
+    public final UserRepo userDao;
 
     public UserController(UserRepo userDao) {
         this.userDao = userDao;
     }
+
+
 }

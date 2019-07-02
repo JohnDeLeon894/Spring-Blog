@@ -24,9 +24,10 @@ public class Post {
         this.title = title;
     }
 
-    public Post(String title, String body) {
+    public Post(String title, String body, User id) {
         this.title = title;
         this.body = body;
+        this.owner = id;
 
     }
 
@@ -54,5 +55,13 @@ public class Post {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }
