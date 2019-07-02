@@ -10,6 +10,7 @@
     <h3 th:text="${post.title}"></h3>
     <p th:text="@{'Author: ' + ${post.owner.name}}"></p>
     <p th:text="${post.body}"></p>
+    <p th:text="@{'Email: ' + ${post.owner.email} }"></p>
 
     <form th:action="@{'/post/'+${post.id}+'/delete'}" method="post">
         <button id="${post.id}">Delete this Post</button>

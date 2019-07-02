@@ -12,7 +12,7 @@ public class Post {
     private String title;
     @Column(nullable = false, columnDefinition = "text")
     private String body;
-    @OneToOne()
+    @ManyToOne
     private User owner;
 
 

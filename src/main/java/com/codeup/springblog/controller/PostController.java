@@ -50,18 +50,17 @@ public class PostController {
     }
 
     @GetMapping(path = "/post/create")
-    public String createPostForm(){
+    public String createPostForm(Model model){
+        model.addAttribute("post", new Post());
         return "post/create";
     }
 
     @PostMapping(path = "/post/create")
-
-    public String insert(
-        @RequestParam String title,
-        @RequestParam String body){
+    public String insert(@ModelAttribute Post post)
+    {
         long idNum = (long)((Math.random()*299)+1);
         User user = userDao.findById(idNum);
-        Post post= new Post(title, body,user);
+//        Post post= new Post(title, body,user);
         post.setOwner(user);
         postDao.save(post);
         return "redirect:/post";
@@ -70,6 +69,21 @@ public class PostController {
     @PostMapping("/post/{id}/delete")
     public String delete(@PathVariable long id) {
         postDao.delete(id);
+        return "redirect:/post";
+    }
+
+    @GetMapping("/post/{id}/edit")
+    public String edit(Model model, @PathVariable long id){
+        model.addAttribute("post", postDao.findById(id));
+        return "post/edit";
+    }
+
+    @PostMapping(path ="/post/{id}/edit")
+    public String postEdit(@ModelAttribute Post post, @PathVariable long id){
+        System.out.println("Post edit started");
+        User user = post.getOwner();
+        post.setOwner(user);
+        postDao.save(post);
         return "redirect:/post";
     }
 

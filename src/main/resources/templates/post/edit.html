@@ -6,13 +6,13 @@
 </head>
 <body>
 <div>
-    <form th:action="@{/post/create}" th:method="post" th:object="${post}">
+    <form th:action="@{'/post/'+${post.id}+'/edit'}" th:method="post" th:object="${post}">
         <label for="title">Title</label>
         <input type="text" th:field="*{title}"/>
         <label for="body">body of post</label>
         <textarea th:field="*{body}"></textarea>
         <button type="submit">submit</button>
-
+        <input type="hidden" th:field="*{owner}"/>
     </form>
 </div>
 
