@@ -4,6 +4,7 @@ import com.codeup.springblog.repos.PostRepo;
 import com.codeup.springblog.model.User;
 import com.codeup.springblog.model.Post;
 import com.codeup.springblog.repos.UserRepo;
+import com.codeup.springblog.service.MailSvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +19,13 @@ public class PostController {
 
     private final UserRepo userDao;
 
-    public PostController (PostRepo postDao, UserRepo userDao){
+    private final MailSvc emailService;
+
+    public PostController(PostRepo postDao, UserRepo userDao, MailSvc emailService) {
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailService = emailService;
     }
-
 
     public static void main(String[] args) {
 
@@ -63,18 +66,24 @@ public class PostController {
 //        Post post= new Post(title, body,user);
         post.setOwner(user);
         postDao.save(post);
+        emailService.prepareAndSend(post, "NewPost", "A new post has been created!!");
         return "redirect:/post";
     }
 
     @PostMapping("/post/{id}/delete")
     public String delete(@PathVariable long id) {
+        Post post = postDao.findById(id);
+        String msgBody = String.format("The post \"%s\" has been deleted", post.getTitle());
+        emailService.prepareAndSend(post, "Post deleted",msgBody);
         postDao.delete(id);
         return "redirect:/post";
     }
 
     @GetMapping("/post/{id}/edit")
     public String edit(Model model, @PathVariable long id){
-        model.addAttribute("post", postDao.findById(id));
+        Post post = postDao.findById(id);
+        model.addAttribute("post", post);
+
         return "post/edit";
     }
 
@@ -84,6 +93,8 @@ public class PostController {
         User user = post.getOwner();
         post.setOwner(user);
         postDao.save(post);
+        String msgBody = String.format("The post \"%s\" has been edited", post.getTitle());
+        emailService.prepareAndSend(post,"A post has been edited", msgBody);
         return "redirect:/post";
     }
 
