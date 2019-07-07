@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-    <meta charset="UTF-8" />
-    <title>Log In</title>
+<head th:replace="partials/leghand :: head">
 </head>
 <body>
+<div th:replace="partials/postnavparts :: inxnavbar"></div>
 <h1>Log In</h1>
 <div th:if="${param.error}">
     Invalid Username and Password.
@@ -21,5 +20,6 @@
     <input id="password" name="password" type="password" />
     <input type="submit" value="Log In" />
 </form>
+<leghand th:replace="partials/Leghand :: leghand"/>
 </body>
 </html>

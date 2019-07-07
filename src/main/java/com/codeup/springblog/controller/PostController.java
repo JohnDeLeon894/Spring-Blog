@@ -110,12 +110,12 @@ public class PostController {
         return "post/index";
     }
 
-    @GetMapping(path = "/post/search/")
-    public String search (@PathVariable String srch, Model model){
+    @GetMapping(path = "/post/search")
+    public String search (@RequestParam String search, Model model){
 //        List<User> users = userDao.findAll();
 //        List<Post> posts = postDao.findAll();
-        System.out.println(srch+" was passed ");
-        User user = userDao.findByName(srch);
+        System.out.println(search+" was passed ");
+        User user = userDao.findByName(search);
         List<Post> postList = postDao.findAllByOwner(user);
         model.addAttribute("posts", postList);
         return "post/index";

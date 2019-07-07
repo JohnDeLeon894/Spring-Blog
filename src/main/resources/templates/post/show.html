@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+<head th:replace="partials/leghand :: head">
 </head>
 <body>
 <div th:replace="partials/postnavparts :: inxnavbar"></div>
@@ -26,6 +24,6 @@
     </div>
 </div>
 
-
+<leghand th:replace="partials/Leghand :: leghand"/>
 </body>
 </html>

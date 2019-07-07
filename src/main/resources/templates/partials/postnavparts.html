@@ -2,70 +2,84 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="X-future" content="automattician" />
+    <meta charset="UTF-8"/>
+    <meta name="X-future" content="automattician"/>
     <title>Title</title>
 </head>
 <body>
 
 
-<nav th:fragment="inxnavbar">
+<nav th:fragment="inxnavbar" class="navbar navbar-expand-lg navbar-light bg-dark text-light">
     <div sec:authorize="isAnonymous()">
-        <ul>
-            <li>
+        <a class="navbar-brand" href="#">Blog Page</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
                 <form th:action="@{/login}">
-                    <button class="btn-link btn">LOGIN</button>
+                    <button class="btn btn-dark">LOGIN</button>
                 </form>
             </li>
-            <li>
+            <li class="nav-item">
                 <form th:action="@{/sign-up}">
-                    <button class="btn-link btn">REGISTER</button>
+                    <button class="btn btn-dark">REGISTER</button>
                 </form>
             </li>
         </ul>
     </div>
     <div sec:authorize="isAuthenticated()">
+        <a class="navbar-brand" href="#">Blog Page</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <form th:action="@{/post}">
+                        <button class="btn btn-dark">HOME</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form th:action="@{/logout}" th:method="post">
+                        <button class="btn btn-dark">LOGOUT</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form th:action="@{post/create}">
+                        <button class="btn btn-dark">New post</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form th:action="@{'post/mypost/'+${#authentication.principal.id}}">
+                        <button class="btn btn-dark">My Post</button>
+                    </form>
+                </li>
 
-        <ul>
-            <li>
-                <form th:action="@{/post}">
-                    <button class="btn-link btn">HOME</button>
-                </form>
-            </li>
-            <li>
-                <form th:action="@{/logout}" th:method="post">
-                    <button class="btn-link btn" style="margin-top: 8px">LOGOUT</button>
-                </form>
-            </li>
-            <li>
-                <form th:action="@{post/create}">
-                    <button class="btn-link btn" >New post</button>
-                </form>
-            </li>
-            <li>
-                <form th:action="@{'post/mypost/'+${#authentication.principal.id}}" >
-                    <button class="btn-link btn" >My Post</button>
-                </form>
-            </li>
-
-        </ul>
-            <form class="form-inline" th:action="@{'post/search'}" th:method="get">
-                <label th:for="search">Search post by User</label>
+            </ul>
+            <div>
+            <form class="form-inline my-2 my-lg-0 float-right" th:action="@{'post/search'}"
+                  th:method="get">
+                <label for="search">Search post by User: </label>
                 <input class="form-control mr-sm-2" th:type="search" th:placeholder="Search"
-                       th:id="search" th:name="search"/>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                       id="search" th:name="search"/>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search
+                </button>
             </form>
+            </div>
 
 
-        <!--    <a th:href = "@{|/post/${post.id}|}">-->
-        <!--        <span th:text="${post.id}"></span>-->
-        <!--    </a>-->
-
+            <!--    <a th:href = "@{|/post/${post.id}|}">-->
+            <!--        <span th:text="${post.id}"></span>-->
+            <!--    </a>-->
+        </div>
     </div>
-    <form action="https://public-api.wordpress.com/wpcom/v2/work-with-us" method="get" >
-        <button type="submit">request header?</button>
-    </form>
+    <!--    <form action="https://public-api.wordpress.com/wpcom/v2/work-with-us" method="get" >-->
+    <!--        <button type="submit">request header?</button>-->
+    <!--    </form>-->
 </nav>
+
+
 
 </body>
 </html>

@@ -1,11 +1,7 @@
 <!DOCTYPE html >
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-    <!--    <link rel="stylesheet" href="/templates/css.css"/>-->
-    <!--    <link th:href="@{}"/>-->
+<head th:replace="partials/leghand :: head">
 </head>
 <body>
 <div th:replace="partials/postnavparts :: inxnavbar"></div>
@@ -31,5 +27,6 @@
     </a>
 </div>
 
+<leghand th:replace="partials/Leghand :: leghand"/>
 </body>
 </html>
