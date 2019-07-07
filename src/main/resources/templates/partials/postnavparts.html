@@ -1,20 +1,70 @@
 <!DOCTYPE html >
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
+    <meta name="X-future" content="automattician" />
     <title>Title</title>
 </head>
 <body>
 
 
 <nav th:fragment="inxnavbar">
-<div th:each="post: ${posts}">
+    <div sec:authorize="isAnonymous()">
+        <ul>
+            <li>
+                <form th:action="@{/login}">
+                    <button class="btn-link btn">LOGIN</button>
+                </form>
+            </li>
+            <li>
+                <form th:action="@{/sign-up}">
+                    <button class="btn-link btn">REGISTER</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+    <div sec:authorize="isAuthenticated()">
 
-    <a th:href = "@{|/post/${post.id}|}">
-        <span th:text="${post.id}"></span>
-    </a>
+        <ul>
+            <li>
+                <form th:action="@{/post}">
+                    <button class="btn-link btn">HOME</button>
+                </form>
+            </li>
+            <li>
+                <form th:action="@{/logout}" th:method="post">
+                    <button class="btn-link btn" style="margin-top: 8px">LOGOUT</button>
+                </form>
+            </li>
+            <li>
+                <form th:action="@{post/create}">
+                    <button class="btn-link btn" >New post</button>
+                </form>
+            </li>
+            <li>
+                <form th:action="@{'post/mypost/'+${#authentication.principal.id}}" >
+                    <button class="btn-link btn" >My Post</button>
+                </form>
+            </li>
 
-</div>
+        </ul>
+            <form class="form-inline" th:action="@{'post/search'}" th:method="get">
+                <label th:for="search">Search post by User</label>
+                <input class="form-control mr-sm-2" th:type="search" th:placeholder="Search"
+                       th:id="search" th:name="search"/>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+
+
+        <!--    <a th:href = "@{|/post/${post.id}|}">-->
+        <!--        <span th:text="${post.id}"></span>-->
+        <!--    </a>-->
+
+    </div>
+    <form action="https://public-api.wordpress.com/wpcom/v2/work-with-us" method="get" >
+        <button type="submit">request header?</button>
+    </form>
 </nav>
 
 </body>

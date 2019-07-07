@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8" />
     <title>Title</title>
 </head>
 <body>
+<div th:replace="partials/postnavparts :: inxnavbar"></div>
+
 <div>
     <form th:action="@{'/post/'+${post.id}+'/edit'}" th:method="post" th:object="${post}">
         <label for="title">Title</label>

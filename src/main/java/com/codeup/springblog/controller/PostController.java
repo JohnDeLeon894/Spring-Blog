@@ -5,10 +5,13 @@ import com.codeup.springblog.model.User;
 import com.codeup.springblog.model.Post;
 import com.codeup.springblog.repos.UserRepo;
 import com.codeup.springblog.service.MailSvc;
+import org.apache.catalina.connector.Response;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -59,10 +62,11 @@ public class PostController {
     }
 
     @PostMapping(path = "/post/create")
-    public String insert(@ModelAttribute Post post)
+    public String insert(@ModelAttribute Post post, @RequestParam long userId )
     {
-        long idNum = (long)((Math.random()*299)+1);
-        User user = userDao.findById(idNum);
+//        long idNum = (long)((Math.random()*299)+1);
+        User user = userDao.findById(userId);
+//                userDao.findById(idNum);
 //        Post post= new Post(title, body,user);
         post.setOwner(user);
         postDao.save(post);
@@ -96,6 +100,32 @@ public class PostController {
         String msgBody = String.format("The post \"%s\" has been edited", post.getTitle());
         emailService.prepareAndSend(post,"A post has been edited", msgBody);
         return "redirect:/post";
+    }
+
+    @GetMapping(path = "/post/mypost/{id}")
+    public String viewPosts(Model model, @PathVariable long id){
+        User user = userDao.findById(id);
+        List<Post> postList = postDao.findAllByOwner(user);
+        model.addAttribute("posts", postList);
+        return "post/index";
+    }
+
+    @GetMapping(path = "/post/search/")
+    public String search (@PathVariable String srch, Model model){
+//        List<User> users = userDao.findAll();
+//        List<Post> posts = postDao.findAll();
+        System.out.println(srch+" was passed ");
+        User user = userDao.findByName(srch);
+        List<Post> postList = postDao.findAllByOwner(user);
+        model.addAttribute("posts", postList);
+        return "post/index";
+    }
+    @GetMapping(value = "/servlet", headers = "X-future=automattician")
+
+    public  String randoButton(HttpServletResponse response, HttpServletRequest request){
+//        response.addHeader("X-future", "automattician");
+                response.setHeader("X-future", "automattician");
+        return "redirect:https://public-api.wordpress.com/wpcom/v2/work-with-us";
     }
 
 }

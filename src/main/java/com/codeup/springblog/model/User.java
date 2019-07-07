@@ -24,6 +24,14 @@ public class User {
     }
 
     public User() { }
+
+    public User(User copy) {
+        id = copy.id;
+        email = copy.email;
+        name = copy.name;
+        password = copy.password;
+        post = copy.post;
+    }
 //  ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~**~Getters~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~**~
     public long getId() {
         return id;
