@@ -9,52 +9,61 @@
     <div th:each="post: ${posts} ">
 
         <th:block th:if="${post.id %2} == 0">
-            <div class="card m-4 float-left" style="width: 36rem;">
+            <div class="card m-4 float-left p-2 bg-dark text-light btn btn-outline-light" style="width: 36rem;">
                 <a th:href="@{|/post/${post.id}|}" style="text-decoration: none; color: #000;">
                     <div>
-                        <div class="card-header">
+                        <div class="card-header text-light">
                             <h2 th:text="${post.title}"></h2>
                             <p th:text="${post.owner.name}"></p>
                         </div>
-                        <p th:text="${post.body}"></p>
-                        <div sec:authorize="isAuthenticated()">
-                            <th:block th:if="${#authentication.principal.id} == ${post.owner.id}">
+                        <div class="card-body text-light">
+                            <p th:text="${post.body}"></p>
+                            <div sec:authorize="isAuthenticated()">
+                                <th:block
+                                        th:if="${#authentication.principal.id} == ${post.owner.id}">
 
-                                <form th:action="@{'/post/'+${post.id}+'/delete'}" th:method="post">
-                                    <button id="${post.id}">Delete this Post</button>
-                                </form>
-                                <form th:action="@{'/post/'+${post.id}+'/edit'}" th:method="GET">
-                                    <button th:id="${post.id}">Edit this post</button>
-                                </form>
+                                    <form th:action="@{'/post/'+${post.id}+'/delete'}"
+                                          th:method="post">
+                                        <button class="btn btn-outline-light" id="${post.id}">Delete this Post</button>
+                                    </form>
+                                    <form th:action="@{'/post/'+${post.id}+'/edit'}"
+                                          th:method="GET">
+                                        <button class="btn btn-outline-light" th:id="${post.id}">Edit this post</button>
+                                    </form>
 
-                            </th:block>
+                                </th:block>
+                            </div>
                         </div>
                     </div>
                 </a>
             </div>
         </th:block>
         <th:block th:if="${post.id %2} != 0">
-            <div class="card m-4 float-right" style="width: 36rem;">
+            <div class="card m-4 float-right p-2 bg-dark text-light btn btn-outline-light" style="width: 36rem;">
                 <a th:href="@{|/post/${post.id}|}" style="text-decoration: none; color: #000;">
                     <div class="">
-                        <div class="card-header">
+                        <div class="card-header text-light">
                             <h2 th:text="${post.title}"></h2>
                             <p th:text="${post.owner.name}"></p>
                         </div>
-                        <div class="card-body">
-                        <p th:text="${post.body}"></p>
-                        </div>
-                        <div sec:authorize="isAuthenticated()">
-                            <th:block th:if="${#authentication.principal.id} == ${post.owner.id}">
+                        <div class="card-body text-light">
+                            <p th:text="${post.body}"></p>
 
-                                <form th:action="@{'/post/'+${post.id}+'/delete'}" th:method="post">
-                                    <button id="${post.id}">Delete this Post</button>
-                                </form>
-                                <form th:action="@{'/post/'+${post.id}+'/edit'}" th:method="GET">
-                                    <button th:id="${post.id}">Edit this post</button>
-                                </form>
+                            <div sec:authorize="isAuthenticated()">
+                                <th:block
+                                        th:if="${#authentication.principal.id} == ${post.owner.id}">
 
-                            </th:block>
+                                    <form th:action="@{'/post/'+${post.id}+'/delete'}"
+                                          th:method="post">
+                                        <button class="btn btn-outline-light" id="${post.id}">Delete this Post</button>
+                                    </form>
+                                    <form th:action="@{'/post/'+${post.id}+'/edit'}"
+                                          th:method="GET">
+                                        <button class="btn btn-outline-light" th:id="${post.id}">Edit this post</button>
+                                    </form>
+
+                                </th:block>
+                            </div>
                         </div>
                     </div>
                 </a>

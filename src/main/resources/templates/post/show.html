@@ -5,22 +5,28 @@
 </head>
 <body>
 <div th:replace="partials/postnavparts :: inxnavbar"></div>
-<div>
-    <h3 th:text="${post.title}"></h3>
-    <p th:text="@{'Author: ' + ${post.owner.name}}"></p>
-    <p th:text="${post.body}"></p>
-    <p th:text="@{'Email: ' + ${post.owner.email} }"></p>
-    <div sec:authorize="isAuthenticated()">
-        <th:block th:if="${#authentication.principal.id} == ${post.owner.id}">
+<div class="container">
+    <div class="card m-4 float-left p-2 bg-dark text-light btn btn-outline-light">
+        <div class="card-header text-light">
+            <div class="card-body text-light">
+                <h3 th:text="${post.title}"></h3>
+            </div>
+            <p th:text="@{'Author: ' + ${post.owner.name}}"></p>
+            <p th:text="${post.body}"></p>
+            <p th:text="@{'Email: ' + ${post.owner.email} }"></p>
+            <div sec:authorize="isAuthenticated()">
+                <th:block th:if="${#authentication.principal.id} == ${post.owner.id}">
 
-            <form th:action="@{'/post/'+${post.id}+'/delete'}" th:method="post">
-                <button id="${post.id}">Delete this Post</button>
-            </form>
-            <form th:action="@{'/post/'+${post.id}+'/edit'}" th:method="GET">
-                <button th:id="${post.id}">Edit this post</button>
-            </form>
+                    <form th:action="@{'/post/'+${post.id}+'/delete'}" th:method="post">
+                        <button class="btn btn-outline-light" id="${post.id}">Delete this Post</button>
+                    </form>
+                    <form th:action="@{'/post/'+${post.id}+'/edit'}" th:method="GET">
+                        <button class="btn btn-outline-light" th:id="${post.id}">Edit this post</button>
+                    </form>
 
-        </th:block>
+                </th:block>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -5,19 +5,27 @@
 </head>
 <body>
 <div th:replace="partials/postnavparts :: inxnavbar"></div>
-<h1>Create an account</h1>
-<form th:action="@{/sign-up}" method="POST" th:object="${user}">
-    <label for="username">Username</label>
-    <input id="username" th:field="*{name}" />
+<div class="bg-dark text-light m-4 p-3 float-right">
 
-    <label for="email">Email</label>
-    <input id="email" th:field="*{email}" />
-
-    <label for="password">Password</label>
-    <input id="password" type="password" th:field="*{password}" />
-
-    <input value="Sign me up!" type="submit" />
-</form>
+    <h1>Create an account</h1>
+    <form th:action="@{/sign-up}" method="POST" th:object="${user}">
+        <div class="form-group d-flex justify-content-end">
+        <label for="username">Username</label>
+        <input class="m-1" id="username" th:field="*{name}"/>
+        </div>
+        <div class="form-group d-flex justify-content-end">
+        <label for="email">Email</label>
+        <input class="m-1" id="email" th:field="*{email}"/>
+        </div>
+        <div class="form-group d-flex justify-content-end">
+        <label for="password">Password</label>
+        <input class="m-1" id="password" type="password" th:field="*{password}"/>
+        </div>
+        <div class="form-group ">
+        <input class="form-control btn btn-outline-light" value="Sign me up!" type="submit"/>
+        </div>
+    </form>
+</div>
 <leghand th:replace="partials/Leghand :: leghand"/>
 </body>
 </html>

@@ -10,7 +10,7 @@
 
 
 <nav th:fragment="inxnavbar" class="navbar navbar-expand-lg navbar-light bg-dark text-light">
-    <a class="navbar-brand" href="#">Blog Page</a>
+    <a class="navbar-brand text-light" href="/post">Blog Page</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -47,12 +47,12 @@
                     </form>
                 </li>
                 <li class="nav-item">
-                    <form th:action="@{post/create}">
+                    <form th:action="@{/post/create}">
                         <button class="btn btn-dark">New post</button>
                     </form>
                 </li>
                 <li class="nav-item">
-                    <form th:action="@{'post/mypost/'+${#authentication.principal.id}}">
+                    <form th:action="@{'/post/mypost/'+${#authentication.principal.id}}">
                         <button class="btn btn-dark">My Post</button>
                     </form>
                 </li>
