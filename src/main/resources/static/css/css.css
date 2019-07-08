@@ -2,3 +2,6 @@ body{
     background-image: url("https://source.unsplash.com/random/1600x1200");
     background-attachment: fixed;
 }
+.card{
+    background-color: rgba(50,56, 62,0.7);
+}

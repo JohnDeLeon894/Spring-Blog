@@ -8,10 +8,12 @@ import com.codeup.springblog.service.MailSvc;
 import org.apache.catalina.connector.Response;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -62,8 +64,14 @@ public class PostController {
     }
 
     @PostMapping(path = "/post/create")
-    public String insert(@ModelAttribute Post post, @RequestParam long userId )
+    public String insert(@ModelAttribute Post post, @RequestParam long userId ,
+                         @Valid Post vPost, Errors validation, Model model)
     {
+        if(validation.hasErrors()){
+            model.addAttribute("erros", validation);
+            model.addAttribute("post", vPost);
+            return "/post/create";
+        }
 //        long idNum = (long)((Math.random()*299)+1);
         User user = userDao.findById(userId);
 //                userDao.findById(idNum);

@@ -9,7 +9,8 @@
     <div th:each="post: ${posts} ">
 
         <th:block th:if="${post.id %2} == 0">
-            <div class="card m-4 float-left p-2 bg-dark text-light btn btn-outline-light" style="width: 36rem;">
+            <div class="card m-4 float-left p-2  text-light btn btn-outline-dark" style="width:
+            36rem;">
                 <a th:href="@{|/post/${post.id}|}" style="text-decoration: none; color: #000;">
                     <div>
                         <div class="card-header text-light">
@@ -39,7 +40,7 @@
             </div>
         </th:block>
         <th:block th:if="${post.id %2} != 0">
-            <div class="card m-4 float-right p-2 bg-dark text-light btn btn-outline-light" style="width: 36rem;">
+            <div class="card m-4 float-right p-2  text-light btn btn-outline-dark" style="width: 36rem;">
                 <a th:href="@{|/post/${post.id}|}" style="text-decoration: none; color: #000;">
                     <div class="">
                         <div class="card-header text-light">

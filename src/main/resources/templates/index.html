@@ -8,12 +8,22 @@
 
 <body>
 <!-- ... -->
-<div sec:authorize="isAuthenticated()">
-    This content is only shown to authenticated users.
+<div class="card user-info bg-dark text-light" th:style="'width: 24rem;'"
+     sec:authorize="isAuthenticated()">
+    <p>
+        This content is only shown to authenticated users.
+    </p>
+    <p>
+        User ID: <span th:text="${#authentication.principal.id}"/>
+    </p>
+    <p>
+        Username: <span th:text="${#authentication.principal.name}"/>
+    </p>
+    <p>
+        Email: <span th:text="${#authentication.principal.email}"/>
+    </p>
 
-    User ID: <span th:text="${#authentication.principal.id}"/>
-    Username: <span th:text="${#authentication.principal.username}"/>
-    Email: <span th:text="${#authentication.principal.email}"/>
+
 </div>
 
 <leghand th:replace="partials/Leghand :: leghand"/>

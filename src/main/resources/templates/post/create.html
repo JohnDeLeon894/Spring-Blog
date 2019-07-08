@@ -12,10 +12,12 @@
                 <div class="form-group">
                     <label th:for="title">Title</label>
                     <input class="form-control" id="title" type="text" th:field="*{title}"/>
+                    <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
                 </div>
                 <div class="form-group">
                     <label th:for="body">Post</label>
                     <textarea class="form-control" rows="3" id="body" th:field="*{body}"></textarea>
+                    <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}" />
                     <input type="hidden" name="userId" th:value="*{#authentication.principal.id}"/>
                     <button class="btn btn-outline-light" type="submit">submit</button>
                 </div>
