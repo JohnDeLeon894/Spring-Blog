@@ -107,7 +107,7 @@ public class PostController {
         User user = userDao.findById(id);
         List<Post> postList = postDao.findAllByOwner(user);
         model.addAttribute("posts", postList);
-        return "post/index";
+        return "/post/index";
     }
 
     @GetMapping(path = "/post/search")
@@ -120,6 +120,18 @@ public class PostController {
         model.addAttribute("posts", postList);
         return "post/index";
     }
+
+    @PostMapping("/post/search")
+    public String postSearch (HttpServletRequest req, Model model){
+        String search = req.getParameter("search");
+        System.out.println(search+" was passed ");
+        User user = userDao.findByName(search);
+        List<Post> postList = postDao.findAllByOwner(user);
+        model.addAttribute("posts", postList);
+
+        return "/post/index";
+    }
+
     @GetMapping(value = "/servlet", headers = "X-future=automattician")
 
     public  String randoButton(HttpServletResponse response, HttpServletRequest request){

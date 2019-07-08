@@ -10,11 +10,14 @@
 
 
 <nav th:fragment="inxnavbar" class="navbar navbar-expand-lg navbar-light bg-dark text-light">
+    <a class="navbar-brand" href="#">Blog Page</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     <div sec:authorize="isAnonymous()">
-        <a class="navbar-brand" href="#">Blog Page</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <form th:action="@{/login}">
@@ -28,12 +31,10 @@
             </li>
         </ul>
     </div>
-    <div sec:authorize="isAuthenticated()">
-        <a class="navbar-brand" href="#">Blog Page</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <div sec:authorize="isAuthenticated()" th:style="@{'width: 100%;'}">
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <form th:action="@{/post}">
@@ -57,28 +58,30 @@
                 </li>
 
             </ul>
-            <div>
-            <form class="form-inline my-2 my-lg-0 float-right" th:action="@{'post/search'}"
-                  th:method="get">
-                <label for="search">Search post by User: </label>
-                <input class="form-control mr-sm-2" th:type="search" th:placeholder="Search"
-                       id="search" th:name="search"/>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search
-                </button>
-            </form>
-            </div>
 
+            <div class="float-right">
+                <form class="form-inline my-2 my-lg-0 " th:action="@{/post/search}"
+                      th:method="post">
+                    <label for="search"> </label>
+                    <input class="form-control mr-sm-2" th:type="search"
+                           th:placeholder="@{Search post by User}"
+                           id="search" th:name="search"/>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search
+                    </button>
+                </form>
+            </div>
 
             <!--    <a th:href = "@{|/post/${post.id}|}">-->
             <!--        <span th:text="${post.id}"></span>-->
             <!--    </a>-->
         </div>
+
     </div>
     <!--    <form action="https://public-api.wordpress.com/wpcom/v2/work-with-us" method="get" >-->
     <!--        <button type="submit">request header?</button>-->
     <!--    </form>-->
-</nav>
 
+</nav>
 
 
 </body>
