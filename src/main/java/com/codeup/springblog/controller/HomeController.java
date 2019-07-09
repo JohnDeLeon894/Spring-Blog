@@ -8,7 +8,7 @@ public class HomeController {
 
     @GetMapping(path = "/")
     public String  landingPage(){
-        return "/index";
+        return "index";
     }
 
 }

@@ -37,7 +37,7 @@ public class UserController {
         if(validation.hasErrors()){
             model.addAttribute("erros", validation);
             model.addAttribute("user", vUser);
-            return "/users/sign-up";
+            return "users/sign-up";
         }
 
         String hash = passwordEncoder.encode(user.getPassword());

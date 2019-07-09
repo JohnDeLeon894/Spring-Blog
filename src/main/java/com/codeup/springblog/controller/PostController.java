@@ -115,7 +115,7 @@ public class PostController {
         User user = userDao.findById(id);
         List<Post> postList = postDao.findAllByOwner(user);
         model.addAttribute("posts", postList);
-        return "/post/index";
+        return "post/index";
     }
 
     @GetMapping(path = "/post/search")
@@ -137,7 +137,7 @@ public class PostController {
         List<Post> postList = postDao.findAllByOwner(user);
         model.addAttribute("posts", postList);
 
-        return "/post/index";
+        return "post/index";
     }
 
     @GetMapping(value = "/servlet", headers = "X-future=automattician")
