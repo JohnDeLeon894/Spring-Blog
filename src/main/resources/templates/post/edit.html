@@ -5,7 +5,8 @@
 </head>
 <body>
 <div th:replace="partials/postnavparts :: inxnavbar"></div>
-
+<th:block
+        th:if="${#authentication.principal.id} == ${post.owner.id}">
 <div class="container">
     <div class="card bg-dark text-muted m-5 p-3">
         <div class="form-group">
@@ -27,7 +28,11 @@
         </div>
     </div>
 </div>
+</th:block>
 
+<th:block th:if="${#authentication.principal.id} != ${post.owner.id}">
+
+</th:block>
 <leghand th:replace="partials/leghand :: leghand"/>
 </body>
 </html>
